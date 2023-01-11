@@ -30,18 +30,17 @@ def html_code(url):
 # Returns a specified amount of reviews in an array
 def reviews(soup):
     data_str = ""
+    maxReviews = 3
     className = "a-expander-content reviewText review-text-content a-expander-partial-collapse-content"
 
     # Collects a predefined number of reviews
     for i in range(1, maxReviews + 1):
         try:
             item = soup.find_all("div", class_=className)[i]
-            if len(str(item.get_text())) > minSizeReview:
-                data_str = data_str + str(item.get_text())
-            else:
-                print("review too short")
+            data_str = data_str + str(item.get_text())
         except:
             print("review error")
+        
 
     data_str = data_str.split("\n")
     while '' in data_str:
@@ -61,12 +60,9 @@ def productImage(soup):
 
     return (source)
 
-
 ################################
-# ! Change Parameters here
-filepath = 'asin.csv'
-maxReviews = 5
-minSizeReview = 20
+filepath = 'shoes.csv'
+category = 'shoe'
 ################################
 
 
@@ -74,21 +70,17 @@ with open(filepath) as csv_file:
     csv_reader = csv.reader(csv_file)
     rows = list(csv_reader)
 
-counter = 0
-
 for row in rows:
-    url = "https://www.amazon.com/-/de/dp/" + row[1]
-
+    url = "https://www.amazon.com/-/de/dp/" + row[0]
+    
     soup = html_code(url)
 
-    data = {'category': row[0], 'image': productImage(soup), 'reviews': [
-        reviews(soup)]}
+    data = {'category': category, 'Image': productImage(soup), 'reviews': [reviews(soup)]}
 
     # Create DataFrame
     df = pd.DataFrame(data)
 
     # Save the output.
-    df.to_csv('amazon_data_V2.csv', mode='a', index=False, header=False)
+    df.to_csv('amazon_review.csv', mode = 'a', index= False, header=False)
 
-    print(str(counter) + " " + row[0])
-    counter = counter + 1
+    print("Finished a line")

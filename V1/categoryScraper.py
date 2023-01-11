@@ -2,6 +2,9 @@ import requests
 from bs4 import BeautifulSoup
 import pandas as pd
 
+# TODO: Iterate trough list of search queries and assign the category by using the search term 
+
+
 # Define the header, so that the website doesn't block the access
 HEADERS = ({'User-Agent':
             'Mozilla/5.0 (Windows NT 10.0; Win64; x64) \
