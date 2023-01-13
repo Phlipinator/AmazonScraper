@@ -37,7 +37,7 @@ def getASIN(soup):
     return (data_str)
 
 
-searchTerms = ["t-shirt", "hoodie", "shorts", "shoes", "trousers"]
+searchTerms = ["t-shirt", "shirt", "sweater", "shoes", "sandals", "jacket", "trousers", "shorts"]
 
 for index in range(0, len(searchTerms)):
     url_1 = "https://www.amazon.com/-/de/s?k="
@@ -56,7 +56,7 @@ for index in range(0, len(searchTerms)):
         df = pd.DataFrame(data)
 
         # Save the output.
-        df.to_csv('asin.csv', mode='a', index=False, header=False)
+        df.to_csv('asin_V3.csv', mode='a', index=False, header=False)
 
         print(searchTerms[index] + " page " + str(page))
 

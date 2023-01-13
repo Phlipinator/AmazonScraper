@@ -64,7 +64,7 @@ def productImage(soup):
 
 ################################
 # ! Change Parameters here
-filepath = 'asin.csv'
+filepath = 'asin_V3.csv'
 maxReviews = 5
 minSizeReview = 20
 ################################
@@ -88,7 +88,7 @@ for row in rows:
     df = pd.DataFrame(data)
 
     # Save the output.
-    df.to_csv('amazon_data_V2.csv', mode='a', index=False, header=False)
+    df.to_csv('amazon_data_V3.csv', mode='a', index=False, header=False)
 
     print(str(counter) + " " + row[0])
     counter = counter + 1
