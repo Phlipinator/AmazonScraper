@@ -52,19 +52,23 @@ def reviews(soup):
 
 # Returns a URL to the landing image
 def productImage(soup):
+    source = "no image"
     # For a list of all images use the code described here:
     # https://proxyway.com/knowledge-base/how-to-get-src-attribute-from-img-tag-using-beautifulsoup
     # Search for all image tags and use the first one
-    element = soup.find_all("img", class_="a-dynamic-image")[0]
+    try:
+        element = soup.find_all("img", class_="a-dynamic-image")[0]
     # Extract the 'src' attribute
-    source = element['src']
+        source = element['src']
+    except:
+        print("no image found")
 
     return (source)
 
 
 ################################
 # ! Change Parameters here
-filepath = 'asin_V3.csv'
+filepath = 'ASIN.csv'
 maxReviews = 5
 minSizeReview = 20
 ################################
